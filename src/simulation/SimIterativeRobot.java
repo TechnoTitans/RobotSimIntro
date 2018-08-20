@@ -50,8 +50,10 @@ public class SimIterativeRobot {
 		}
 	}
 	private RobotSide left, right;
-	Gyro gyro;
+	public static Gyro gyro;
 	private static final int X_SIZE = 90, Y_SIZE = 100;
+	private boolean initialized = false;
+	
 	public SimIterativeRobot() {
 		Encoder leftEncoder = new Encoder(), rightEncoder = new Encoder();
 		gyro = new Gyro();
@@ -80,11 +82,17 @@ public class SimIterativeRobot {
 		return diffVec;
 	}
 	
+	public void autonomousInit() {
+		System.out.println("Override me! -- auto init");
+	}
+	
 	public void autonomousPeriodic() {
-		System.out.println("Override me!");
+		System.out.println("Override me! -- auto periodic");
 	}
 	
 	public void update() {
+		if (!initialized) autonomousInit();
+		initialized = true;
 		autonomousPeriodic();
 		Vector2D diffVec = getDiffVec();
 		Vector2D oldDiffVec = diffVec;
@@ -117,19 +125,5 @@ public class SimIterativeRobot {
 	
 	private void line(Graphics g, double x1, double y1, double x2, double y2) {
 		g.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
-	}
-	
-	double getAverageSpeed() {
-		double leftSpeed = left.talon.getSpeed();
-		double rightSpeed = right.talon.getSpeed();
-		return (leftSpeed + rightSpeed) / 2;
-	}
-	
-	double getAverageDistance() {
-		return (left.talon.getEncoder().getDistance() + right.talon.getEncoder().getDistance()) / 2;
-	}
-	
-	double getAngleFromGyro() {
-		return gyro.getAngle();
 	}
 }

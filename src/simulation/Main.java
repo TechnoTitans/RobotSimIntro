@@ -76,4 +76,8 @@ public class Main {
 		return frames;
 	}
 
+	public static double getTime() {
+		return Main.getFrames() / Main.FRAMES_PER_SECOND;
+	}
+
 }

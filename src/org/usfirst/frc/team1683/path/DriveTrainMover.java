@@ -7,10 +7,12 @@ import org.usfirst.frc.team1683.driveTrain.DriveTrain;
 import org.usfirst.frc.team1683.driveTrain.Motor;
 import org.usfirst.frc.team1683.driveTrain.MotorGroup;
 
+import simulation.Command;
+
 /**
  * 
  * @author Pran
- * Mover for robor to move for a set distance in a line
+ * Mover for robot to move for a set distance in a line
  *
  */
 public class DriveTrainMover {

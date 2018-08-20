@@ -7,18 +7,26 @@ import org.usfirst.frc.team1683.path.Path;
 import org.usfirst.frc.team1683.path.PathPoint;
 import org.usfirst.frc.team1683.path.SpeedEasing;
 
+import commands.TestCommand;
+import commands.TestCommand2;
+import commands.TestCommand3;
+
 
 public class Robot extends SimIterativeRobot {
-	private TankDrive driveTrain;
+	public static TankDrive driveTrain;
 	
 	@Override
 	public void robotInit() {
 		driveTrain = new TankDrive(super.getLeftSimGroup(), super.getRightSimGroup());
 	}
 	
+	public void autonomousInit() {
+		Command c = new TestCommand3();
+		c.start();
+	}
+	
 	@Override
 	public void autonomousPeriodic() {
-		Main.debug.put("Gyro", gyro.getAngle());
-		driveTrain.set(0.5);
+		Command.runAllCommands();
 	}
 }
