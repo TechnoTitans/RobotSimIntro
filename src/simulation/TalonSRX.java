@@ -20,7 +20,7 @@ public class TalonSRX implements Motor {
 	private static final double RESPONSIVENESS = 0.05; // 0=unresponsive, 1=immediate
 	private double bias;
 	public static double MAX_TRUE_SPEED = 20; // inches per second
-	public static final double WHEEL_RADIUS = 2;
+	public static final double WHEEL_RADIUS = 2.0235;
 	
 	/**
 	 * Constructor for a TalonSRX motor
@@ -37,9 +37,9 @@ public class TalonSRX implements Motor {
 
 	@Override
 	public void set(double speed) {
-		if (targetSpeed > 1) targetSpeed = 1;
-		if (targetSpeed < -1) targetSpeed = -1;
-		targetSpeed = speed;
+		if (speed > 1) targetSpeed = 1;
+		else if (speed < -1) targetSpeed = -1;
+		else targetSpeed = speed;
 		disabled = false;
 	}
 	
@@ -62,7 +62,7 @@ public class TalonSRX implements Motor {
 			throw new IllegalStateException("Cannot get speed when no encoder is attached."
 					+ " Use the setEncoder method to attach an encoder.");
 		}
-		return encoder.getSpeed() / Encoder.TICKS_PER_REVOLUTION;
+		return encoder.getSpeed();
 	}
 
 	/**

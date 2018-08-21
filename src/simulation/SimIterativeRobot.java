@@ -46,7 +46,7 @@ public class SimIterativeRobot {
 			change.multiply(-magDiff * s);
 			lastChange.add(change);
 			talonPos.add(change);
-			talon.updateEncoders(lastChange.magnitude() / Main.PIXELS_PER_INCH * Math.signum(talon.get()));
+			talon.updateEncoders(lastChange.magnitude() / Main.PIXELS_PER_INCH * Math.signum(-lastChange.y * normalizedDiffVec.x + lastChange.x * normalizedDiffVec.y));
 		}
 	}
 	private RobotSide left, right;
