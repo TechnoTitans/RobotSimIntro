@@ -14,7 +14,6 @@ public class Encoder {
 	public static final double TICKS_PER_REVOLUTION = 4096;
 	
 	public void update(double rev) {
-		System.out.println(rev);
 		double ticks = rev * TICKS_PER_REVOLUTION;
 		totalDistanceSpeedSample += ticks;
 		distances.addLast(ticks);
