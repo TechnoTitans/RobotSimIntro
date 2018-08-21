@@ -22,15 +22,10 @@ public class Robot extends SimIterativeRobot {
 	}
 	
 	public void autonomousInit() {
-		driveTrain.set(0.5, 0.5);
-		prevEnc = driveTrain.getLeftEncoder().getDistance();
 	}
 	
 	@Override
 	public void autonomousPeriodic() {
-		Command.runAllCommands();
-		double encoderLeft = driveTrain.getLeftEncoder().getDistance();
-		Main.debug.put("Distance", encoderLeft);
-		if (encoderLeft > 8000) driveTrain.stop();
+		System.out.println("Hello");
 	}
 }
