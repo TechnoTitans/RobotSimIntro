@@ -7,10 +7,6 @@ import org.usfirst.frc.team1683.path.Path;
 import org.usfirst.frc.team1683.path.PathPoint;
 import org.usfirst.frc.team1683.path.SpeedEasing;
 
-import commands.TestCommand;
-import commands.TestCommand2;
-import commands.TestCommand3;
-
 
 public class Robot extends SimIterativeRobot {
 	public static TankDrive driveTrain;
