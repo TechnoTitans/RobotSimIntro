@@ -1,16 +1,12 @@
 package simulation;
 
-import org.usfirst.frc.team1683.driveTrain.DriveTrain;
 import org.usfirst.frc.team1683.driveTrain.TankDrive;
-import org.usfirst.frc.team1683.path.LinearEasing;
-import org.usfirst.frc.team1683.path.Path;
-import org.usfirst.frc.team1683.path.PathPoint;
-import org.usfirst.frc.team1683.path.SpeedEasing;
+
+import commands.MoveToObject;
 
 
 public class Robot extends SimIterativeRobot {
 	public static TankDrive driveTrain;
-	private double prevEnc;
 	
 	@Override
 	public void robotInit() {
@@ -18,10 +14,15 @@ public class Robot extends SimIterativeRobot {
 	}
 	
 	public void autonomousInit() {
+//		new MoveToObject().start();
 	}
 	
 	@Override
 	public void autonomousPeriodic() {
-		System.out.println("Hello");
+		if (gyro.getAngle() < 10) driveTrain.set(0.5, -0.5);
+		else driveTrain.stop();
+		Main.debug.put("Vision distance", vision.getDistance());
+		Main.debug.put("Vision angle", vision.getAngle());
+		Main.debug.put("Cube skew", vision.getSkew());
 	}
 }

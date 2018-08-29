@@ -8,6 +8,7 @@ import java.awt.geom.AffineTransform;
 import org.usfirst.frc.team1683.driveTrain.AntiDrift;
 import org.usfirst.frc.team1683.driveTrain.MotorGroup;
 import org.usfirst.frc.team1683.sensors.Gyro;
+import org.usfirst.frc.team1683.sensors.Vision;
 
 import math.Vector2D;
 
@@ -51,6 +52,7 @@ public class SimIterativeRobot {
 	}
 	private RobotSide left, right;
 	public static Gyro gyro;
+	public static Vision vision;
 	private static final int X_SIZE = 90, Y_SIZE = 100;
 	private boolean initialized = false;
 	
@@ -82,12 +84,27 @@ public class SimIterativeRobot {
 		return diffVec;
 	}
 	
+	Vector2D getMidFront(Vector2D perpVec) {
+		Vector2D mid = left.talonPos.copy();
+		mid.add(right.talonPos);
+		mid.multiply(0.5);
+		Vector2D midFront = perpVec.copy();
+		midFront.multiply(-Y_SIZE / 2);
+		midFront.add(mid);
+		return midFront;
+	}
+	
 	public void autonomousInit() {
 		System.out.println("Override me! -- auto init");
 	}
 	
 	public void autonomousPeriodic() {
 		System.out.println("Override me! -- auto periodic");
+	}
+	
+	public void initVision() {
+		vision.update(left.talonPos.x / 2 + right.talonPos.x / 2, (left.talonPos.y + right.talonPos.y) / 2);
+		vision.updatePerpVec(new Vector2D(0, -1));
 	}
 	
 	public void update() {
@@ -106,6 +123,8 @@ public class SimIterativeRobot {
 		right.shrink(diffVec, magDiff);
 		diffVec = getDiffVec();
 		gyro.changeAngle(diffVec.getAngle(), oldDiffVec.getAngle());
+		vision.update(getMidFront(perpVec));
+		vision.updatePerpVec(perpVec);
 	}
 	protected void paintComponent(Graphics g) {
 		int x = (int) (left.talonPos.x + right.talonPos.x) / 2,

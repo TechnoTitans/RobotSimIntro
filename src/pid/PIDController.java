@@ -1,10 +1,5 @@
 package pid;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-import simulation.Main;
-
 public class PIDController {
 	private double kP, kI, kD;
 	private PIDSource source;
@@ -33,6 +28,52 @@ public class PIDController {
 	
 	public double getError() {
 		return previousError == Double.POSITIVE_INFINITY ? 0 : previousError;
+	}
+	
+	public double get() {
+		return error;
+	}
+
+	/**
+	 * @return the kP
+	 */
+	public double getP() {
+		return kP;
+	}
+
+	/**
+	 * @param kP the kP to set
+	 */
+	public void setP(double kP) {
+		this.kP = kP;
+	}
+
+	/**
+	 * @return the kI
+	 */
+	public double getI() {
+		return kI;
+	}
+
+	/**
+	 * @param kI the kI to set
+	 */
+	public void setI(double kI) {
+		this.kI = kI;
+	}
+
+	/**
+	 * @return the kD
+	 */
+	public double getD() {
+		return kD;
+	}
+
+	/**
+	 * @param kD the kD to set
+	 */
+	public void setD(double kD) {
+		this.kD = kD;
 	}
 	
 	

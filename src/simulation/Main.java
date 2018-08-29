@@ -12,8 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.usfirst.frc.team1683.sensors.Vision;
+
 public class Main {
 	private static SimIterativeRobot robot;
+	private static Cube cube;
 	public static final int FRAME_WIDTH = 700;
 	public static final int FRAME_HEIGHT = 700;
 	public static final double PIXELS_PER_INCH =  2.5;
@@ -42,10 +45,14 @@ public class Main {
 					xDebug += 20;
 				}
 				robot.paintComponent(g);
+				cube.paintComponent(g);
 			}
 		};
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         robot = new Robot();
+        cube = new Cube();
+        SimIterativeRobot.vision = new Vision(cube.getRotation(), cube.getX(), cube.getY());
+        robot.initVision();
         //Display the window.
         frame.getContentPane().add(drawer);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
