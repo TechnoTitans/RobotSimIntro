@@ -4,7 +4,7 @@ import simulation.Main;
 
 public class Gyro {
 	private double angle = 0;
-	private static final double VARIATION = 0.001;
+	private static final double VARIATION = 0.0006;
 	public void reset() {
 		angle = 0;
 	}

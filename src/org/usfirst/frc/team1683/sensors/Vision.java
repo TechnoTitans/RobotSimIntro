@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1683.sensors;
 
 import math.Vector2D;
-import simulation.Main;
-import simulation.SimIterativeRobot;
 
 public class Vision {
 	private double cubeRotation,

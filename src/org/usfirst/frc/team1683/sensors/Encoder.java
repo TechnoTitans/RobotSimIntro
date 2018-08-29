@@ -3,9 +3,6 @@ package org.usfirst.frc.team1683.sensors;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import simulation.Main;
-import simulation.TalonSRX;
-
 public class Encoder {
 
 	private double encoderTicks = 0;
