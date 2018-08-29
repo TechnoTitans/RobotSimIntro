@@ -6,7 +6,7 @@ import simulation.Robot;
 public class Forward extends PIDCommand {
 	private double distance, speed;
 	
-	private static final double RAMP_DOWN = 4000;
+	private static final double RAMP_DOWN = 18.8;
 	
 	public Forward(double distance, double speed) {
 		super(0.05, 0.0005, 0); // P, I, D
@@ -33,7 +33,8 @@ public class Forward extends PIDCommand {
 	@Override
 	protected boolean isFinished() {
 		double averageDistance = (Robot.driveTrain.getLeftEncoder().getDistance() + Robot.driveTrain.getRightEncoder().getDistance()) / 2;
-		return Math.abs(averageDistance) > distance - RAMP_DOWN * speed;
+		double averageSpeed = (Robot.driveTrain.getLeftEncoder().getSpeed() + Robot.driveTrain.getRightEncoder().getSpeed()) / 2;
+		return Math.abs(averageDistance) > distance - RAMP_DOWN * averageSpeed;
 	}
 	
 	@Override
