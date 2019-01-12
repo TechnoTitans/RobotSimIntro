@@ -16,8 +16,8 @@ import javax.swing.SwingUtilities;
 
 public class Main {
 	private static SimIterativeRobot robot;
-	public static final int FRAME_WIDTH = 1400;
-	public static final int FRAME_HEIGHT = 1400;
+	public static final int FRAME_WIDTH = 1000;
+	public static final int FRAME_HEIGHT = 1000;
 	public static final double PIXELS_PER_INCH =  5;
 	public static final double FRAMES_PER_SECOND = 30;
 	public static Random r = new Random();
@@ -26,7 +26,7 @@ public class Main {
 
 	public static final double targetWidth = 1.75; // in
 	public static final double targetHeight = 18;
-	public static final double topY = 700;
+	public static final double topY = FRAME_HEIGHT * 0.2;
 
 	private static VisionStrips strips;
 

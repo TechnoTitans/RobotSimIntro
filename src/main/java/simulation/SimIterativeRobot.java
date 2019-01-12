@@ -12,6 +12,7 @@ import org.usfirst.frc.team1683.sensors.Gyro;
 import math.Vector2D;
 
 import org.usfirst.frc.team1683.sensors.Encoder;
+import org.usfirst.frc.team1683.sensors.VisionLine;
 import org.usfirst.frc.team1683.sensors.VisionStripSensor;
 
 public class SimIterativeRobot {
@@ -53,6 +54,7 @@ public class SimIterativeRobot {
 	private RobotSide left, right;
 	public static Gyro gyro;
 	public static VisionStripSensor visionSensor;
+	public static VisionLine visionLine;
 	private static final int X_SIZE = 180, Y_SIZE = 200;
 	private boolean initialized = false;
 	
@@ -87,6 +89,8 @@ public class SimIterativeRobot {
 	public void initVision() {
 		visionSensor.update(left.talonPos.x / 2 + right.talonPos.x / 2, (left.talonPos.y + right.talonPos.y) / 2);
 		visionSensor.updatePerpVec(new Vector2D(0, -1));
+		visionLine = new VisionLine();
+		visionLine.update(getMidFront(new Vector2D(0, -1)));
 	}
 
 	Vector2D getMidFront(Vector2D perpVec) {
@@ -125,6 +129,7 @@ public class SimIterativeRobot {
 		gyro.changeAngle(diffVec.getAngle(), oldDiffVec.getAngle());
 		visionSensor.update(getMidFront(perpVec));
 		visionSensor.updatePerpVec(perpVec);
+		visionLine.update(getMidFront(perpVec));
 	}
 	protected void paintComponent(Graphics g) {
 		int x = (int) (left.talonPos.x + right.talonPos.x) / 2,
