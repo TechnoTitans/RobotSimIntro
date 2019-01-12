@@ -14,7 +14,8 @@ public abstract class Command {
 	private boolean interruptible = true;
 	
 	static Set<Command> runningCommands = new HashSet<>();
-	
+	private static Set<Command> runningCommandsQueue = new HashSet<>();
+
 	public Command() {
 		requirements = new HashSet<>();
 	}
@@ -112,10 +113,12 @@ public abstract class Command {
 				}
 			}
 		}
-		runningCommands.add(this);
+		runningCommandsQueue.add(this);
 	}
 	
 	static void runAllCommands() {
+		runningCommands.addAll(runningCommandsQueue);
+		runningCommandsQueue.clear();
 		Iterator<Command> iter = runningCommands.iterator();
 		while (iter.hasNext()) {
 			Command c = iter.next();

@@ -22,10 +22,17 @@ public class Robot extends SimIterativeRobot {
 	}
 	
 	public void autonomousInit() {
+		driveTrain.set(1);
 	}
 	
 	@Override
 	public void autonomousPeriodic() {
-		System.out.println("Hello");
+		if (driveTrain.getLeftEncoder().getDistance() > 80000) {
+			driveTrain.stop();
+		}
+		Main.debug.put("Vision distance", visionSensor.getDistance());
+		Main.debug.put("Vision angle", visionSensor.getAngle());
+		Main.debug.put("Skew", visionSensor.getSkew());
+
 	}
 }
